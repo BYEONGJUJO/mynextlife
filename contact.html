@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 | 나의 다음 생애 테스트</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border-radius: 15px;
+            margin: -2rem -2rem 3rem -2rem;
+        }
+        h1 { margin: 0; }
+        .contact-method {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #FF6B6B;
+        }
+        .contact-method h3 {
+            margin-top: 0;
+            color: #FF6B6B;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #FF6B6B;
+            text-decoration: none;
+            font-weight: bold;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+        .form-group {
+            margin: 1rem 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #FF6B6B;
+        }
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .faq-section {
+            margin-top: 3rem;
+        }
+        .faq-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 3px solid #4ECDC4;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 0.5rem;
+        }
+        .contact-info {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .social-link:hover {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+        .emergency-contact {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .feature-request {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← 메인으로 돌아가기</a>
+        
+        <div class="header">
+            <h1>🌈 문의하기</h1>
+            <p>궁금한 점이나 개선 사항이 있으시면 언제든 연락주세요!</p>
+        </div>
+
+        <div class="contact-method">
+            <h3>📧 이메일 문의 (추천)</h3>
+            <p><strong>일반 문의:</strong> support@nextlife-test.site</p>
+            <p><strong>개인정보 관련:</strong> privacy@nextlife-test.site</p>
+            <p><strong>사업 제휴:</strong> business@nextlife-test.site</p>
+            <p><strong>기술 문의:</strong> tech@nextlife-test.site</p>
+            <p><small>📅 응답시간: 평일 24시간 내, 주말 48시간 내 답변드리겠습니다</small></p>
+        </div>
+
+        <div class="contact-method">
+            <h3>📝 온라인 문의 양식</h3>
+            <form id="contactForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="category">문의 유형 *</label>
+                    <select id="category" name="category" required>
+                        <option value="">선택해주세요</option>
+                        <option value="service">서비스 이용 문의</option>
+                        <option value="technical">기술적 문제/오류</option>
+                        <option value="privacy">개인정보 관련</option>
+                        <option value="business">사업 제휴 제안</option>
+                        <option value="suggestion">기능 개선 제안</option>
+                        <option value="complaint">불만/신고</option>
+                        <option value="compliment">칭찬/격려</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">이름 (선택)</label>
+                    <input type="text" id="name" name="name" placeholder="홍길동 (익명 문의도 가능합니다)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">이메일 주소 *</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">제목 *</label>
+                    <input type="text" id="subject" name="subject" placeholder="문의 제목을 입력해주세요" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">문의 내용 *</label>
+                    <textarea id="message" name="message" placeholder="궁금한 점이나 의견을 자세히 적어주세요. 스크린샷이나 오류 메시지가 있다면 함께 보내주시면 더 정확한 답변을 드릴 수 있습니다." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="device">사용 기기 (선택)</label>
+                    <select id="device" name="device">
+                        <option value="">선택해주세요</option>
+                        <option value="pc-windows">PC (Windows)</option>
+                        <option value="pc-mac">PC (Mac)</option>
+                        <option value="mobile-android">모바일 (Android)</option>
+                        <option value="mobile-ios">모바일 (iOS)</option>
+                        <option value="tablet">태블릿</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="submit-btn">문의하기 📨</button>
+            </form>
+        </div>
+
+        <div class="emergency-contact">
+            <h3>🚨 긴급 문의</h3>
+            <p><strong>개인정보 유출이나 심각한 기술적 문제의 경우:</strong></p>
+            <p>📧 <strong>emergency@nextlife-test.site</strong> (24시간 모니터링)</p>
+            <p><small>⚠️ 일반 문의는 위 연락처를 사용하지 마시고, 해당 카테고리 이메일을 이용해주세요.</small></p>
+        </div>
+
+        <div class="feature-request">
+            <h3>💡 새로운 기능 제안</h3>
+            <p>더 재미있는 다음 생애 옵션이나 새로운 기능에 대한 아이디어가 있으시다면:</p>
+            <p>📧 <strong>ideas@nextlife-test.site</strong></p>
+            <p>🎁 채택된 아이디어는 특별한 혜택을 드립니다!</p>
+        </div>
+
+        <div class="faq-section">
+            <h2>💡 자주 묻는 질문</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 다음 생애 예측 결과가 정확한가요?</div>
+                <div>A: 다음 생애 테스트는 순수 <strong>오락 목적</strong>의 AI 서비스로, 과학적 근거에 기반하지 않습니다. 재미로 즐겨주세요! 🎭</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 업로드한 사진은 어떻게 처리되나요?</div>
+                <div>A: 분석 완료 즉시 서버에서 <strong>자동 삭제</strong>됩니다. 어떠한 백업이나 저장도 하지 않으니 안심하세요! 🔒</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 모바일에서도 잘 작동하나요?</div>
+                <div>A: 네! 모든 기기(PC, 모바일, 태블릿)에서 최적화되어 작동합니다. 📱💻</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 결과를 다시 볼 수 있나요?</div>
+                <div>A: 현재는 실시간 분석만 제공됩니다. 결과 저장 기능은 추후 업데이트 예정입니다. 📅</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 어떤 사진을 업로드해야 정확한가요?</div>
+                <div>A: 정면을 바라보는 선명한 셀카가 가장 좋습니다. 너무 어둡거나 흐린 사진은 분석이 어려울 수 있어요. 📸</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 타인의 사진을 사용해도 되나요?</div>
+                <div>A: 본인의 사진만 사용해주세요. 타인의 사진을 무단으로 사용하는 것은 초상권 침해가 될 수 있습니다. ⚠️</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 사업 제휴는 어떻게 하나요?</div>
+                <div>A: business@nextlife-test.site로 제휴 제안서를 보내주세요. 검토 후 연락드리겠습니다. 🤝</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: 광고 문의는 어디로 하나요?</div>
+                <div>A: 광고 및 마케팅 협력은 business@nextlife-test.site로 문의해주세요. 📢</div>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h3>🌟 소셜 미디어에서 만나요!</h3>
+            <p>최신 업데이트와 재미있는 콘텐츠를 확인하세요</p>
+            <div class="social-links">
+                <a href="#" class="social-link">📷 Instagram</a>
+                <a href="#" class="social-link">🐦 Twitter</a>
+                <a href="#" class="social-link">📘 Facebook</a>
+                <a href="#" class="social-link">🎵 TikTok</a>
+                <a href="#" class="social-link">📺 YouTube</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                💬 SNS에서는 빠른 소식과 이벤트 정보를 만나보세요!
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem; color: #666; font-size: 0.9rem; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+            <p>📞 <strong>전화 문의는 받지 않습니다.</strong> 이메일 또는 문의 양식을 이용해주세요.</p>
+            <p>🕒 <strong>운영시간:</strong> 평일 09:00 - 18:00 (주말 및 공휴일 휴무)</p>
+            <p>⚡ <strong>긴급상황:</strong> emergency@nextlife-test.site (24시간 모니터링)</p>
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid #ddd;">
+            <p>© 2025 나의 다음 생애 테스트. 소중한 의견 감사합니다! 🙏</p>
+        </div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // 폼 데이터 수집
+            const formData = new FormData(event.target);
+            const category = formData.get('category');
+            const name = formData.get('name') || '익명';
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            const device = formData.get('device') || '미선택';
+            
+            // 이메일 주소 결정
+            let targetEmail = 'support@nextlife-test.site';
+            switch(category) {
+                case 'privacy':
+                    targetEmail = 'privacy@nextlife-test.site';
+                    break;
+                case 'business':
+                    targetEmail = 'business@nextlife-test.site';
+                    break;
+                case 'technical':
+                    targetEmail = 'tech@nextlife-test.site';
+                    break;
+                case 'suggestion':
+                    targetEmail = 'ideas@nextlife-test.site';
+                    break;
+            }
+            
+            // 이메일 링크 생성 (실제 구현시에는 서버 처리 필요)
+            const emailSubject = encodeURIComponent(`[다음생애테스트 문의] ${subject}`);
+            const emailBody = encodeURIComponent(`
+문의 유형: ${category}
+이름: ${name}
+이메일: ${email}
+사용 기기: ${device}
+
+문의 내용:
+${message}
+
+---
+이 메일은 nextlife-test.site 문의 양식에서 발송되었습니다.
+발송 시간: ${new Date().toLocaleString('ko-KR')}
+            `.trim());
+            
+            const mailtoLink = `mailto:${targetEmail}?subject=${emailSubject}&body=${emailBody}`;
+            
+            // 이메일 클라이언트 열기
+            window.location.href = mailtoLink;
+            
+            // 성공 메시지
+            alert(`📧 문의가 접수되었습니다!\n\n담당: ${targetEmail}\n이메일 클라이언트에서 발송을 완료해주세요.`);
+            
+            // 폼 초기화
+            event.target.reset();
+        }
+
+        // 카테고리 변경 시 도움말 표시
+        document.getElementById('category').addEventListener('change', function(e) {
+            const category = e.target.value;
+            const messageTextarea = document.getElementById('message');
+            
+            let placeholder = "궁금한 점이나 의견을 자세히 적어주세요.";
+            
+            switch(category) {
+                case 'technical':
+                    placeholder = "발생한 문제를 자세히 설명해주세요. (어떤 상황에서, 어떤 오류가 발생했는지, 사용 기기 등)";
+                    break;
+                case 'privacy':
+                    placeholder = "개인정보 관련 문의사항을 구체적으로 작성해주세요. (처리 현황 확인, 삭제 요청 등)";
+                    break;
+                case 'business':
+                    placeholder = "제휴 제안 내용을 상세히 작성해주세요. (회사명, 제휴 분야, 기대 효과 등)";
+                    break;
+                case 'suggestion':
+                    placeholder = "새로운 다음 생애 옵션이나 기능에 대한 아이디어를 자유롭게 제안해주세요!";
+                    break;
+                case 'complaint':
+                    placeholder = "불편사항이나 문제점을 구체적으로 알려주세요. 개선하겠습니다.";
+                    break;
+                case 'compliment':
+                    placeholder = "격려의 말씀이나 좋았던 점을 알려주세요. 큰 힘이 됩니다! 😊";
+                    break;
+            }
+            
+            messageTextarea.placeholder = placeholder;
+        });
+    </script>
+</body>
+</html>
